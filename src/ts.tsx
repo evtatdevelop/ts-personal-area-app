@@ -4,7 +4,6 @@ export interface IContact {
   email: string,
   phone: string,
 }
-
 export interface IAction {
   type: string,
   payload: any

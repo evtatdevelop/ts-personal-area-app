@@ -1,11 +1,17 @@
-.App {
-  width: 100%;
-  margin: 0 auto;
+.form {
   display: flex;
+  padding: 20px;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  overflow-x: hidden;
+  width: 75%;
+  max-width: 350px;
+  min-width: 150px;
+  border: 1px solid lightblue;
+  border-radius: 3px;
+  margin-top: 25vh;
+
+  div {
+    margin-bottom: 4px;
+  }
 }
 
 

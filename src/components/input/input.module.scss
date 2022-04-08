@@ -1,0 +1,70 @@
+$height: 28px;
+
+.input {
+  width: 100%;
+  
+  .inputBox {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+
+    input {
+      width: 100%;
+      padding: 8px $height+1 8px 5px;
+      border: 1px solid #978f8f;
+      border-radius: 3px;
+      color: #424242;
+
+      &:focus,
+      &:active {
+        outline: 2px solid lightblue;
+      } 
+
+    }
+
+    .clrButton {
+      width: $height;
+      height: $height;
+      position: absolute;
+      color: gray;
+      background-color: transparent;
+      border: none;
+      border-radius: 3px;
+      padding: 0;
+      font-size: 24px;
+      right: 1px;
+      cursor: pointer;
+
+      &:focus {
+        background-color: lightblue;
+      }
+      &:active {
+        background-color: transparent;
+      }
+    }  
+  }
+  
+  .error {
+    min-height: 19px;
+    color: orangered;
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+/* Tablet portrait */
+@media screen and (min-width: 600px) {}
+
+/* Tablet landscape */
+@media screen and (min-width: 760px) {}
+
+/* Desktop */
+@media screen and (min-width: 1024px) {}
+
+/* WW Desktop */
+@media screen and (min-width: 1200px) {}
