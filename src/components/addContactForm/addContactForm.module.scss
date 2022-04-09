@@ -1,0 +1,49 @@
+.addContactForm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(#000000, .5);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+
+  form {
+    position: fixed;
+    display: flex;
+    min-height: 180px;
+    width: 300px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
+    border: 1px solid lightblue;
+    border-radius: 3px;
+    padding: 10px;
+
+    &>div {
+      width: 100%;
+      margin-bottom: 4px;
+    }
+    .errMeassage {
+      position: absolute;
+      width: 100%;
+      color: orangered;
+      font-size: 12px;
+    }
+
+    .butttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0 0 0;
+      button {
+        &:nth-child(2) {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

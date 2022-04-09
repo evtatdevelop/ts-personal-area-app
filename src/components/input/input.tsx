@@ -2,17 +2,17 @@ import {Component} from 'react'
 import classes from './input.module.scss';
 
 interface PropsType {
-  value: string
-  validation: string[]
-  id: string
-  type: string
-  readonly: boolean
-  placeholder: string
-  autofocus: boolean
-  arialabel: string
-  handlerClick: any
-  inputHandler: Function
-  clearData: Function
+  value: string;
+  validation: string[];
+  id: string;
+  type: string;
+  readonly: boolean;
+  placeholder: string;
+  autofocus: boolean;
+  arialabel: string;
+  handlerClick: any;
+  inputHandler: Function;
+  clearData: Function;
 }
 
 export default class Input extends Component<PropsType, {}> {
@@ -32,17 +32,18 @@ export default class Input extends Component<PropsType, {}> {
   validation = (value: string) => {
     let valid = true;
     if ( this.props.validation ) { 
-      let res: boolean = false;
-      valid = this.props.validation.map(item => {       
-        if (typeof res === 'boolean' && !res) return false;
+      let res: boolean | null = null;
+      valid = this.props.validation.map(item => {  
+        if (typeof(res) == 'boolean' && !res) return false;
         switch (item) {
           case 'required': 
             res = !!value;
             if (!res) this.setState({error: `${this.props.placeholder} required`});
-            return res;          
+            return !!res;          
           case 'email':
-            if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)) this.setState({error: `Invalid Email`});
-            return res;         
+            res = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value); 
+            if (!res) this.setState({error: `Invalid Email`});
+            return !!res;         
           default: return true; 
         }    
       }).reduce((res, curr) => res && curr, true)
