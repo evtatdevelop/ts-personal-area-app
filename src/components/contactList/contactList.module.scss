@@ -1,0 +1,64 @@
+.contactList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .addButton {
+    border: 1px solid lightblue;
+    border-radius: 3px;
+    width: 85%;
+    // max-width: 300px;
+    height: 132px;;
+    padding: 10px;
+    margin-bottom: 1%;
+    font-size: 44px;
+    color:rgba($color: #000000, $alpha: .1);
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      outline: 1px solid lightblue;
+    } 
+    &:focus {
+      outline: 2px solid lightblue;
+    } 
+  }
+}
+
+
+
+/* Tablet portrait */
+@media screen and (min-width: 600px) {
+  .contactList {
+    flex-direction: row;
+    // justify-content: space-around;
+
+    .addButton {
+      width: 48%;
+      margin-left: 1.3%;
+      margin-bottom: 1.3%;
+    }
+  }
+}
+
+/* Tablet landscape */
+@media screen and (min-width: 760px) {
+  .contactList {
+
+    .addButton {
+      width: 32%;
+      margin-left: 1%;
+      margin-bottom: 12px;
+    }
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1024px) {
+
+}
+
+/* WW Desktop */
+@media screen and (min-width: 1200px) {}

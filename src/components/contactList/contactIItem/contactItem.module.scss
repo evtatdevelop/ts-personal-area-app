@@ -1,0 +1,94 @@
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 1%;
+  border: 1px solid lightblue;
+  border-radius: 3px;
+  padding: 10px;
+  background-color: rgb(252, 246, 236);
+  width: 85%;
+  min-height: 132px;
+  // max-width: 300px;
+
+  .info {
+    flex-grow: 1;
+
+    .name {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 4px;
+      span {
+        font-weight: 700;
+      }
+      a {
+        color: inherit;
+        &:hover,
+        &:active, 
+        &:focus {
+          color: rgb(1, 166, 221);
+        }
+      }
+    }    
+  }
+
+
+  .nav {
+    display: flex;
+    justify-content: end;
+    margin-top: 8px;
+    button {
+      color: #7c7c7c;
+      margin-right: 2px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      &.edit {
+        &:hover,
+        &:focus {
+          color: rgb(2, 177, 2);
+        }
+      }
+      &.delete {
+        &:hover,
+        &:focus {
+          color: rgb(255, 130, 85);
+        }
+      }
+
+    }
+  }
+}
+
+
+
+/* Tablet portrait */
+@media screen and (min-width: 600px) {
+  .contactItem {
+    width: 48%;
+    margin-left: 1.3%;
+    margin-bottom: 1.3%;
+  }
+
+}
+
+/* Tablet landscape */
+@media screen and (min-width: 760px) {
+  .contactItem {
+    width: 32%;
+    margin-left: 1%;
+    margin-bottom: 12px;
+  } 
+}
+
+/* Desktop */
+@media screen and (min-width: 1024px) {
+ 
+}
+
+/* WW Desktop */
+@media screen and (min-width: 1200px) {}

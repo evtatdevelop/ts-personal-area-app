@@ -1,0 +1,33 @@
+.searchContact {
+  display: flex;
+  justify-content: center;
+  // margin-bottom: 20px;
+  width: 85%;
+  // width: 100%;
+  // max-width: 300px;
+
+}
+
+
+/* Tablet portrait */
+@media screen and (min-width: 600px) {
+  .searchContact {
+    width: 97.3%;
+  }
+
+}
+
+/* Tablet landscape */
+@media screen and (min-width: 760px) {
+  .searchContact {
+    width: 32%;
+  } 
+}
+
+/* Desktop */
+@media screen and (min-width: 1024px) {
+ 
+}
+
+/* WW Desktop */
+@media screen and (min-width: 1200px) {}
