@@ -97,6 +97,7 @@ class LoginPage extends Component<PropsType, {}> {
         <Button
           label = "Login"
           type = "submit"
+          handlerClick={()=>{}}
         />
 
         { loading ? <Spinner/> : null }

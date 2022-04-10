@@ -1,6 +1,13 @@
+import React from 'react';
 import classes from './button.module.scss';
 
-const Button = (props: any) => {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  handlerClick: any;
+}
+
+const Button: React.FC<ButtonProps &
+React.HTMLProps<HTMLButtonElement>> = (props) => {
+
   const {label, type, handlerClick} = props;
   return (
     <button 

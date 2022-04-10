@@ -12,7 +12,7 @@ const editForm = (id: number) => ({type: 'EDIT_FORM', payload: id})
 
 const addForm = () => ({type: 'ADD_FORM'})
 
-const formsClean = () => ({type: 'FORMS_CLEAN'})
+const formsClean = (): {type: string} => ({type: 'FORMS_CLEAN'})
 
 const delContact = () => ({type: 'DEL_CONTACT'})
 

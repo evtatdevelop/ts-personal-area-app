@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/actions';
 
-const Header = (props: any) => {
+const Header: React.FC = (props: any) => {
   const {idToken} = props;
   return (
     <header className={classes.header}>

@@ -46,6 +46,7 @@ class DelContactForm extends Component<PropsType, {}> {
             <Button
                 label = "Delete"
                 type = "submit"
+                handlerClick={()=>{}}
               />
             <Button
                 label = "Cancel"
