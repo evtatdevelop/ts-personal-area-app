@@ -4,6 +4,7 @@ import Input from '../input';
 import { connect } from 'react-redux';
 import WithService from '../hoc';
 import { contactsFiltred, filtredClean } from '../../redux/actions';
+
 interface PropsType {
   contacts: IContact[];
   contactsFiltred: (contacts:IContact[])=>IAction;
@@ -11,16 +12,6 @@ interface PropsType {
 }
 
 const SearchContact = (props: PropsType) => {
-
-  const filterHandler = (value: string) => {
-    const cleanData = [...props.contacts];
-    const filtered = cleanData.filter(item => 
-      item.name.toUpperCase().includes(value.toUpperCase())
-      || item.phone.toUpperCase().includes(value.toUpperCase())
-      || item.email.toUpperCase().includes(value.toUpperCase())
-    )
-    props.contactsFiltred(filtered)
-  }
 
   return (
     <div className={classes.searchContact}>
@@ -30,7 +21,7 @@ const SearchContact = (props: PropsType) => {
       readonly = {false}
       placeholder = 'Search'
       arialabel = 'Search'
-      inputHandler = {filterHandler}
+      inputHandler = {(value: string) => props.contactsFiltred(filter(value, [...props.contacts]))}
       clearData = {props.filtredClean}
       value = ''
       validation = {[]}
@@ -38,7 +29,14 @@ const SearchContact = (props: PropsType) => {
       handlerClick = {()=>{}}
     />
     </div>
-  
+  )
+}
+
+const filter = (value: string, contacts: IContact[]) => {
+  return [...contacts].filter(item => 
+    item.name.toUpperCase().includes(value.toUpperCase())
+    || item.phone.toUpperCase().includes(value.toUpperCase())
+    || item.email.toUpperCase().includes(value.toUpperCase())
   )
 }
 
