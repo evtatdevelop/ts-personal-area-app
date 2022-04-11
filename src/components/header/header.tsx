@@ -1,17 +1,21 @@
-import { IState } from '../../ts';
+import { IState, IAction } from '../../ts';
 import classes from './header.module.scss'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/actions';
 
-const Header: React.FC = (props: any) => {
-  const {idToken} = props;
+interface PropsType {
+  idToken: boolean;
+  logout: ()=>IAction;
+}
+
+const Header = (props: PropsType) => {
   return (
     <header className={classes.header}>
       <div className={classes.wrapper}>
         <h1>Personal Area</h1>
         <nav className={classes.headerNav}>
-        {idToken
+        {props.idToken
           ? <ul>
               <li><Link to='/logout'>Logout</Link></li>
             </ul>

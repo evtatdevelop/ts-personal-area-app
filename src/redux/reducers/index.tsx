@@ -11,7 +11,7 @@ const initialState: IState = {
   idToken: ''
 }
 
-const reducer = (state: IState = initialState, action: IAction) => {
+const reducer: (state: any, action: IAction) => IState = (state = initialState, action: IAction) => {
   switch (action.type) {
     case 'CONTACTS_LOADED':
       return {

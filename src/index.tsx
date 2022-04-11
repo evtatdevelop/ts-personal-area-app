@@ -1,3 +1,4 @@
+import { IState } from './ts'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './rest.css';

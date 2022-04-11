@@ -68,7 +68,7 @@ class EditContactForm extends Component<PropsType, {}> {
               value = {name}
               validation = {['required']}
               autofocus = {false}
-              handlerClick = {()=>{}}
+              handlerClick = {()=>{return}}
             />
 
             <Input
@@ -82,7 +82,7 @@ class EditContactForm extends Component<PropsType, {}> {
               value = {phone}
               validation = {[]}
               autofocus = {false}
-              handlerClick = {()=>{}}
+              handlerClick = {()=>{return}}
             />            
 
             <Input
@@ -96,14 +96,13 @@ class EditContactForm extends Component<PropsType, {}> {
               value = {email}
               validation = {['email']}
               autofocus = {false}
-              handlerClick = {()=>{}}
+              handlerClick = {()=>{return}}
             />
 
           <div className={classes.butttons}>
             <Button
                 label = "Accept"
                 type = "submit"
-                handlerClick={()=>null}
               />
             <Button
                 label = "Cancel"

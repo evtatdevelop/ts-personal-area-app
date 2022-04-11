@@ -1,5 +1,5 @@
-import { IState } from './ts';
-import React, {Component} from 'react';
+import { IState, IAction } from './ts';
+import { useEffect } from 'react';
 import './App.css';
 import { Routes, Route } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -10,35 +10,25 @@ import Logout from './pages/logout';
 import ContactPage from './pages/contactPage'
 
 interface PropsType {
-  idToken: boolean
-  autoLogin: Function
+  idToken: boolean;
+  autoLogin: () => IAction;
 }
 
-// interface IRoute {
-//   path: string;
-//   name: string;
-//   exact: boolean;
-//   element: any;
-//   props?: any
-// }
-class App extends Component<PropsType, {}> {
+const App = (props: PropsType) => {
 
-  componentDidMount() {
-    this.props.autoLogin();
-  }
+  useEffect( () => {props.autoLogin()} )
 
-  render() {
-    return (
-      <div className="App">
-        <Header/>
-        <Routes>
-          <Route path='/' element={<LoginPage />} />
-          {this.props.idToken ? <Route path='/contacts' element={<ContactPage/>} /> : null}
-          {this.props.idToken ? <Route path='/logout' element={<Logout/>} /> : null}
-        </Routes>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <Header/>
+      <Routes>
+        <Route path='/' element={<LoginPage />} />
+        {props.idToken ? <Route path='/contacts' element={<ContactPage/>} /> : null}
+        {props.idToken ? <Route path='/logout' element={<Logout/>} /> : null}
+      </Routes>
+    </div>
+  );
+
 }
 
 const mapStateToProps = (state: IState) => {

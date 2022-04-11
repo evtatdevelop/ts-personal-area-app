@@ -1,3 +1,4 @@
+import { IAction, IContact } from '../../../ts';
 import classes from './contactItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -5,7 +6,14 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { delForm, editForm } from '../../../redux/actions';
 
-const ContactItem = (props: any) => {  
+interface PropsType {
+  key: number;
+  data: IContact;
+  delForm: (id: number)=>IAction;
+  editForm: (id: number)=>IAction;
+}
+
+const ContactItem = (props: PropsType) => {  
   const {data: {id, name, phone, email}, delForm, editForm} = props;
   return (
     <li className={classes.contactItem}>
@@ -29,11 +37,9 @@ const ContactItem = (props: any) => {
   )
 }
 
-const mapStateToProps = () => ({})
-
 const mapDispatchToProps = {
   delForm,
   editForm
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactItem);
+export default connect(null, mapDispatchToProps)(ContactItem);
