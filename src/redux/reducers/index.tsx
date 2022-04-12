@@ -3,7 +3,7 @@ import { IAction, IContact, IState} from '../../ts';
 const initialState: IState = {
   contacts: [],
   filtered: [],
-  currentContact: {},
+  currentContact: { id: NaN, name: '', email: '', phone: ''},
   delForm: false,
   editForm: false,
   addForm: false,

@@ -1,4 +1,4 @@
-import { IContact, IAction} from '../../ts';
+import { IContact, IAction, IServerLoginResponse} from '../../ts';
 
 const contactsLoaded: (contacts:IContact[])=>IAction = (contacts: IContact[]): IAction => ({type: 'CONTACTS_LOADED', payload: contacts})
 
@@ -22,7 +22,7 @@ const addContact: ()=>IAction = (): IAction => ({type: 'ADD_CONTACT'})
 
 const loadingOn: ()=>IAction = (): IAction => ({type: 'LOADING'})
 
-const login: ({idToken, expiresIn}: {idToken: string, expiresIn: number})=>IAction = ({idToken, expiresIn}: {idToken: string, expiresIn: number}): IAction => {
+const login: ({idToken, expiresIn}: IServerLoginResponse)=>IAction = ({idToken, expiresIn}: {idToken: string, expiresIn: number}): IAction => {
   const expDate = new Date(new Date().getTime() + expiresIn * 1000)
   localStorage.setItem('idToken', idToken)
   localStorage.setItem('expDate', String(expDate))

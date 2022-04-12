@@ -13,21 +13,23 @@ interface PropsType {
 
 const SearchContact = (props: PropsType) => {
 
+  const {contacts, filtredClean} = props;
+  
   return (
     <div className={classes.searchContact}>
-    <Input
-      id = 'search'
-      type = 'text'
-      readonly = {false}
-      placeholder = 'Search'
-      arialabel = 'Search'
-      inputHandler = {(value: string) => props.contactsFiltred(filter(value, [...props.contacts]))}
-      clearData = {props.filtredClean}
-      value = ''
-      validation = {[]}
-      autofocus = {false}
-      handlerClick = {()=>{}}
-    />
+      <Input
+        id = 'search'
+        type = 'text'
+        readonly = {false}
+        placeholder = 'Search'
+        arialabel = 'Search'
+        inputHandler = {(value: string) => props.contactsFiltred(filter(value, contacts))}
+        clearData = {filtredClean}
+        value = ''
+        validation = {[]}
+        autofocus = {false}
+        handlerClick = {()=>{}}
+      />
     </div>
   )
 }

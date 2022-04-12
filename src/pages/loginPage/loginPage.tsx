@@ -1,5 +1,5 @@
-import { IState } from '../../ts';
-import React, {Component} from 'react'
+import { IState, IAction, IServerLoginResponse } from '../../ts';
+import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import classes from './loginPage.module.scss';
 import Input from '../../components/input';
@@ -9,109 +9,91 @@ import { connect } from 'react-redux';
 import WithService from '../../components/hoc';
 import { loadingOn, login } from '../../redux/actions';
 
-interface IStateLP {
-  mail: string,
-  pass: string
-}
-
 interface PropsType {
-  loading: boolean
-  idToken: string
-  loadingOn: Function
-  login: Function
+  loading: boolean;
+  idToken: string;
+  loadingOn: () => IAction;
+  login: ({idToken, expiresIn}: IServerLoginResponse) => IAction;
+  Service: any;
 }
 
-class LoginPage extends Component<PropsType, {}> {
+const LoginPage = (props:PropsType) => {
   
-  mailInp: any = React.createRef();
-  passInp: any = React.createRef();
-  
-  state: IStateLP = { mail: '', pass: '', }
+  const {loading, idToken, Service, login, loadingOn} = props;
 
-  auth = ({mail, pass}: IStateLP) => {
-    const {Service, login, loadingOn}: any = this.props;
-    loadingOn();
+  const mailInp: any = React.createRef();
+  const passInp: any = React.createRef();
+
+  const [mail, setMail] = useState('');
+  const [pass, setPass] = useState('');
+
+  const auth = ({mail, pass}: {mail: string, pass: string}) => {
     Service.auth(mail, pass) 
-    .then((response: any) => {
-      login(response);
-    })
+    .then((response: IServerLoginResponse) => login(response))
   } 
 
-  inputMailHandler = (mail: string) => this.setState({mail});
-  inputPassHandler = (pass: string) => this.setState({pass});
-  clearMail = () => this.setState({mail: ''});
-  clearPass = () => this.setState({pass: ''});
+  const clearMail = () => setMail('');
+  const clearPass = () => setPass('');
 
-  onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {loadingOn}: any = this.props;
     loadingOn();
-    this.auth(this.state);
-    this.clearMail();
-    this.clearPass();
-    this.mailInp.current.onClrHandler();
-    this.passInp.current.onClrHandler(); 
+    auth({mail, pass});
+    clearMail();
+    clearPass();
+    mailInp.current.onClrHandler();
+    passInp.current.onClrHandler(); 
   };
 
-  render() {
-    const loading: boolean = this.props.loading;
-    const idToken: string = this.props.idToken;
+  const form = (
+    <form 
+      className={classes.form} 
+      onSubmit={onSubmit}
+    >
+      <Input
+        ref = {mailInp}
+        id = 'email'
+        type = 'text'
+        readonly = {false}
+        placeholder = 'Email'
+        arialabel = 'Email'
+        inputHandler = { (mail: string) => setMail(mail) }
+        clearData = {clearMail}
+        value = ''
+        validation = {[]}
+        autofocus = {false}
+        handlerClick = {()=>{return}}
+      />
 
-    const form = (
-      <form 
-        className={classes.form} 
-        onSubmit={this.onSubmit}
-      >
-        <Input
-          ref = {this.mailInp}
-          id = 'email'
-          type = 'text'
-          readonly = {false}
-          placeholder = 'Email'
-          arialabel = 'Email'
-          inputHandler = {this.inputMailHandler}
-          clearData = {this.clearMail}
+      <Input
+        ref = {passInp}
+        id = 'password'
+        type = 'password'
+        readonly = {false}
+        placeholder = 'Password'
+        arialabel = {'Password'}
+        inputHandler = { (pass: string) => setPass(pass) }
+        clearData = {clearPass}
+        value = ''
+        validation = {[]}
+        autofocus = {false}
+        handlerClick = {()=>{return}}
+      />
+      
+      <Button
+        label = "Login"
+        type = "submit"
+        handlerClick={()=>{}}
+      />
 
-          value = ''
-          validation = {[]}
-          autofocus = {false}
-          handlerClick = {()=>{return}}
-        />
+      { loading ? <Spinner/> : null }
+    </form>
+  )
 
-        <Input
-          ref = {this.passInp}
-          id = 'password'
-          type = 'password'
-          readonly = {false}
-          placeholder = 'Password'
-          arialabel = {'Password'}
-          inputHandler = {this.inputPassHandler}
-          clearData = {this.clearPass}
+  return(<>
+    { idToken ? <Navigate to={'/contacts'}/> : form }
+  </>)
 
-          value = ''
-          validation = {[]}
-          autofocus = {false}
-          handlerClick = {()=>{return}}
-        />
-        
-        <Button
-          label = "Login"
-          type = "submit"
-          handlerClick={()=>{}}
-        />
-
-        { loading ? <Spinner/> : null }
-      </form>
-    )
-
-    return(
-      <>{
-        idToken ? <Navigate to={'/contacts'}/> : form
-      }</>
-
-           
-    )
-  }
 }
 
 const mapStateToProps = (state: IState) => {

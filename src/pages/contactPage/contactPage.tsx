@@ -1,5 +1,4 @@
-import { IState } from '../../ts';
-import React, {Component} from 'react'
+import { IState, IAction } from '../../ts';
 import classes from './contactPage.module.scss';
 import ContactList from '../../components/contactList';
 import SearchContact from '../../components/searchContact';
@@ -16,30 +15,29 @@ interface PropsType {
   editForm: boolean;
   addForm: boolean;
   loading: boolean;
-  loadingOn: Function;
+  loadingOn: ()=>IAction;
 }
 
-class ContactPage extends Component<PropsType, {}> {
+const ContactPage = (props:PropsType) => {
 
-  render() {
-    const {delForm, addForm, editForm, loading} = this.props;
-    return(
-      <div className={classes.contacts}>
+  const {delForm, addForm, editForm, loading} = props;
 
-        { delForm ? <DelContactForm/> : null }
+  return(
+    <div className={classes.contacts}>
 
-        { editForm ? <EditContactForm/> : null }
+      { delForm ? <DelContactForm/> : null }
 
-        { addForm ? <AddContactForm/> : null }
+      { editForm ? <EditContactForm/> : null }
 
-        { loading ? <Spinner/> : null }
-        { loading ? <div style={{height: "55px"}}></div> : <SearchContact/> }
+      { addForm ? <AddContactForm/> : null }
 
-        <ContactList />
+      { loading ? <Spinner/> : null }
+      { loading ? <div style={{height: "55px"}}></div> : <SearchContact/> }
 
-      </div>
-    )
-  }
+      <ContactList />
+
+    </div>
+  )
 }
 
 const mapStateToProps = (state: IState) => {

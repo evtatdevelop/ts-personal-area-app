@@ -12,10 +12,15 @@ export interface IAction {
 export interface IState {
   contacts: IContact[];
   filtered: IContact[];
-  currentContact: IContact | {};
+  currentContact: IContact;
   delForm: boolean;
   editForm: boolean;
   addForm: boolean;
   loading: boolean;
   idToken: string;
+}
+
+export interface IServerLoginResponse {
+  idToken: string;
+  expiresIn: number;
 }

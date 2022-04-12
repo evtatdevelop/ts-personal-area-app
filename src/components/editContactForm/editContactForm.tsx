@@ -1,5 +1,5 @@
-import { IState, IContact } from '../../ts';
-import React, {Component} from 'react'
+import { IState, IContact, IAction } from '../../ts';
+import { useState } from 'react'
 import classes from './editContactForm.module.scss';
 import Button from '../button';
 import Input from '../input';
@@ -9,32 +9,29 @@ import { formsClean, contactsLoaded, editContact, loadingOn } from '../../redux/
 
 
 interface PropsType {
-  contact: any;
-  formsClean: Function;
-  contactsLoaded: Function;
-  editContact: Function;
-  loadingOn: Function;
-  Service: any
+  contact: IContact;
+  formsClean: ()=>IAction;
+  contactsLoaded: (contacts:IContact[])=>IAction;
+  editContact: ()=>IAction;
+  loadingOn: ()=>IAction;
+  Service: any;
 }
 
-class EditContactForm extends Component<PropsType, {}> {
+const EditContactForm = (props:PropsType) => {
 
-  state = {
-    id: null,
-    name: '',
-    phone: '',
-  }
+  const {contact:{id: locId, name: locName, phone: locPhone, email: locEmail}, formsClean} = props;
 
-  componentDidMount() {
-    this.setState({...this.props.contact})
-  }
+  const [id, setId] = useState(locId);
+  const [name, setName] = useState(locName);
+  const [email, setEmail] = useState(locEmail);
+  const [phone, setPhone] = useState(locPhone);
 
-  onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!this.state.name) return;
-    const {Service, editContact, contactsLoaded, loadingOn} = this.props;
+    if (!locName) return;
+    const {Service, editContact, contactsLoaded, loadingOn} = props;
     loadingOn()
-    Service.update(this.state)
+    Service.update({id, name, email, phone})
     .then(() =>{
       editContact();
       Service.getContacts()
@@ -44,77 +41,65 @@ class EditContactForm extends Component<PropsType, {}> {
     })
   }
 
-  inputNamelHandler = (name: string) => this.setState({name});
-  inputPhoneHandler = (phone: string) => this.setState({phone});
-  inputEmailHandler = (email: string) => this.setState({email});
-  clearName = () => this.setState({name: ''});
-  clearPhone = () => this.setState({phone: ''});
-  clearEmail = () => this.setState({email: ''});
+  return (
+    <div className={classes.editContactForm}>
+      <form onSubmit = { onSubmit }>
+          <Input
+            id = 'name'
+            type = 'text'
+            readonly = {false}
+            placeholder = 'Name'
+            arialabel = {'Name'}
+            inputHandler = { (name: string) => setName(name) }
+            clearData = { () => setName('') }
+            value = {name}
+            validation = {['required']}
+            autofocus = {false}
+            handlerClick = {()=>{return}}
+          />
 
-  render() {
-    const {contact:{name, phone, email}, formsClean} = this.props;
+          <Input
+            id = 'phone'
+            type = 'tel'
+            readonly = {false}
+            placeholder = 'Phone'
+            arialabel = {'Phone'}
+            inputHandler = { (phone: string) => setPhone(phone) }
+            clearData = { () => setPhone('') }
+            value = {phone}
+            validation = {[]}
+            autofocus = {false}
+            handlerClick = {()=>{return}}
+          />            
 
-    return (
-      <div className={classes.editContactForm}>
-        <form onSubmit={e=>this.onSubmit(e)}>
-            <Input
-              id = 'name'
-              type = 'text'
-              readonly = {false}
-              placeholder = 'Name'
-              arialabel = {'Name'}
-              inputHandler = {this.inputNamelHandler}
-              clearData = {this.clearName}
-              value = {name}
-              validation = {['required']}
-              autofocus = {false}
-              handlerClick = {()=>{return}}
+          <Input
+            id = 'email'
+            type = 'email'
+            readonly = {false}
+            placeholder = 'Email'
+            arialabel = {'Email'}
+            inputHandler = { (email: string) => setEmail(email) }
+            clearData = { () => setEmail('') }
+            value = {email}
+            validation = {['email']}
+            autofocus = {false}
+            handlerClick = {()=>{return}}
+          />
+
+        <div className={classes.butttons}>
+          <Button
+              label = "Accept"
+              type = "submit"
             />
-
-            <Input
-              id = 'phone'
-              type = 'tel'
-              readonly = {false}
-              placeholder = 'Phone'
-              arialabel = {'Phone'}
-              inputHandler = {this.inputPhoneHandler}
-              clearData = {this.clearPhone}
-              value = {phone}
-              validation = {[]}
-              autofocus = {false}
-              handlerClick = {()=>{return}}
-            />            
-
-            <Input
-              id = 'email'
-              type = 'email'
-              readonly = {false}
-              placeholder = 'Email'
-              arialabel = {'Email'}
-              inputHandler = {this.inputEmailHandler}
-              clearData = {this.clearEmail}
-              value = {email}
-              validation = {['email']}
-              autofocus = {false}
-              handlerClick = {()=>{return}}
-            />
-
-          <div className={classes.butttons}>
-            <Button
-                label = "Accept"
-                type = "submit"
-              />
-            <Button
-                label = "Cancel"
-                type = "button"
-                handlerClick={formsClean}
-              />          
-          </div>
-        </form>
-      </div>
-    )    
-  }
-
+          <Button
+              label = "Cancel"
+              type = "button"
+              handlerClick={formsClean}
+            />          
+        </div>
+      </form>
+    </div>
+  )
 }
 
 const mapStateToProps = (state: IState) => {
