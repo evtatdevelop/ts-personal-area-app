@@ -21,9 +21,6 @@ const LoginPage = (props:PropsType) => {
   
   const {loading, idToken, Service, login, loadingOn} = props;
 
-  const mailInp: any = React.createRef();
-  const passInp: any = React.createRef();
-
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
 
@@ -40,9 +37,7 @@ const LoginPage = (props:PropsType) => {
     loadingOn();
     auth({mail, pass});
     clearMail();
-    clearPass();
-    mailInp.current.onClrHandler();
-    passInp.current.onClrHandler(); 
+    clearPass(); 
   };
 
   const form = (
@@ -51,7 +46,6 @@ const LoginPage = (props:PropsType) => {
       onSubmit={onSubmit}
     >
       <Input
-        ref = {mailInp}
         id = 'email'
         type = 'text'
         readonly = {false}
@@ -62,11 +56,10 @@ const LoginPage = (props:PropsType) => {
         value = ''
         validation = {[]}
         autofocus = {false}
-        handlerClick = {()=>{return}}
+        handlerClick = {()=>{}}
       />
 
       <Input
-        ref = {passInp}
         id = 'password'
         type = 'password'
         readonly = {false}
@@ -77,7 +70,7 @@ const LoginPage = (props:PropsType) => {
         value = ''
         validation = {[]}
         autofocus = {false}
-        handlerClick = {()=>{return}}
+        handlerClick = {()=>{}}
       />
       
       <Button

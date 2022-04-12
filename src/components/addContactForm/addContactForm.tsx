@@ -1,4 +1,4 @@
-import { IState, IContact, IAction } from '../../ts';
+import { IContact, IAction } from '../../ts';
 import React, { useState } from 'react'
 import classes from './addContactForm.module.scss';
 import Button from '../button';
@@ -62,7 +62,6 @@ const AddContactForm: React.FC<IAddForm> = props => {
           arialabel = {'Phone'}
           inputHandler = { (phone: string) => setPhone(phone) }
           clearData = { () => setPhone('') }
-          
           validation = {[]}
           value = ''
           autofocus = {false}
