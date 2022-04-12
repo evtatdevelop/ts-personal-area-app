@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import WithService from '../hoc/withService';
 import { formsClean, contactsLoaded, editContact, loadingOn } from '../../redux/actions';
 
-
 interface PropsType {
   contact: IContact;
   formsClean: ()=>IAction;
@@ -17,7 +16,7 @@ interface PropsType {
   Service: any;
 }
 
-const EditContactForm = (props:PropsType) => {
+const EditContactForm: React.FC<PropsType> = props => {
 
   const {contact:{id: locId, name: locName, phone: locPhone, email: locEmail}, formsClean} = props;
 
@@ -28,7 +27,7 @@ const EditContactForm = (props:PropsType) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!locName) return;
+    if (!name) return;
     const {Service, editContact, contactsLoaded, loadingOn} = props;
     loadingOn()
     Service.update({id, name, email, phone})
@@ -55,7 +54,7 @@ const EditContactForm = (props:PropsType) => {
             value = {name}
             validation = {['required']}
             autofocus = {false}
-            handlerClick = {()=>{return}}
+            handlerClick = {()=>{}}
           />
 
           <Input
@@ -69,7 +68,7 @@ const EditContactForm = (props:PropsType) => {
             value = {phone}
             validation = {[]}
             autofocus = {false}
-            handlerClick = {()=>{return}}
+            handlerClick = {()=>{}}
           />            
 
           <Input
@@ -83,7 +82,7 @@ const EditContactForm = (props:PropsType) => {
             value = {email}
             validation = {['email']}
             autofocus = {false}
-            handlerClick = {()=>{return}}
+            handlerClick = {()=>{}}
           />
 
         <div className={classes.butttons}>

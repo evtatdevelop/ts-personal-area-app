@@ -1,4 +1,4 @@
-import {Component} from 'react'
+import { Component } from 'react'
 import classes from './input.module.scss';
 
 interface PropsType {
@@ -115,5 +115,3 @@ export default class Input extends Component<PropsType, {}> {
     )
   }
 }
-
-
