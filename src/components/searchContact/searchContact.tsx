@@ -7,8 +7,8 @@ import { contactsFiltred, filtredClean } from '../../redux/actions';
 
 interface PropsType {
   contacts: IContact[];
-  contactsFiltred: (contacts:IContact[])=>IAction;
-  filtredClean: ()=>IAction;
+  contactsFiltred(contacts:IContact[]): IAction;
+  filtredClean(): IAction;
 }
 
 const SearchContact = (props: PropsType) => {

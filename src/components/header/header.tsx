@@ -6,7 +6,7 @@ import { logout } from '../../redux/actions';
 
 interface PropsType {
   idToken: boolean;
-  logout: ()=>IAction;
+  logout(): IAction;
 }
 
 const Header = (props: PropsType) => {

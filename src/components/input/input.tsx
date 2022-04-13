@@ -10,9 +10,9 @@ interface PropsType {
   placeholder: string;
   autofocus: boolean;
   arialabel: string;
-  handlerClick: ()=>any;
-  inputHandler: (value: string)=>any;
-  clearData: ()=>any;
+  handlerClick(): any;
+  inputHandler(value: string): any;
+  clearData(): any;
 }
 
 const Input = (props:PropsType) => {

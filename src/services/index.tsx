@@ -1,19 +1,19 @@
 import { IContact } from '../ts';
 
 export default class Service {
-  _apiBase: string;
+  private _apiBase: string;
 
   constructor() {
     this._apiBase = 'http://localhost:3000/';
   }
 
-  getResource = async (url: string) => {
+  private getResource = async (url: string): Promise<JSON> => {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Could non fetch ${url}. Status: ${res.status}`);
     return await res.json();   
   }
 
-  postResource = async (url: string, data: IContact) => {
+  private postResource = async (url: string, data: IContact): Promise<JSON> => {
     const res = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -23,7 +23,7 @@ export default class Service {
     return await res.json(); 
   }
 
-  updateResource = async (url: string, data: IContact) => {
+  private updateResource = async (url: string, data: IContact): Promise<JSON> => {
     const res = await fetch(url, {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -33,7 +33,7 @@ export default class Service {
     return await res.json(); 
   }
 
-  deleteResource = async (url: string) => {
+  private deleteResource = async (url: string): Promise<JSON> => {
     const res = await fetch(url, {
       method: 'DELETE',
     });
@@ -41,16 +41,13 @@ export default class Service {
     return await res.json(); 
   }
 
-  getContacts = () => this.getResource(`${this._apiBase}contacts`);
-  delete = (id: number) => this.deleteResource(`${this._apiBase}contacts/${id}`); 
-  update = (data: IContact) => this.updateResource(`${this._apiBase}contacts/${data.id}`, data);
-  add = (data: IContact) => this.postResource(`${this._apiBase}contacts`, data);
+  getContacts = (): Promise<JSON> => this.getResource(`${this._apiBase}contacts`);
+  delete = (id: number): Promise<JSON> => this.deleteResource(`${this._apiBase}contacts/${id}`); 
+  update = (data: IContact): Promise<JSON> => this.updateResource(`${this._apiBase}contacts/${data.id}`, data);
+  add = (data: IContact): Promise<JSON> => this.postResource(`${this._apiBase}contacts`, data);
   
-  
-  auth = async (login: string, pass: string) => {
+  auth = async (login: string, pass: string): Promise<{}> => {
     if (login !== 'tester@test.tst' || pass !== 'password' ) return false;
     return this.getResource(`${this._apiBase}auth`)
   }
-
 }
-

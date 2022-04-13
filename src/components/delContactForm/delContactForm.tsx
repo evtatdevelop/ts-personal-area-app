@@ -8,10 +8,10 @@ import { formsClean, contactsLoaded, delContact, loadingOn } from '../../redux/a
 
 interface PropsType {
   contact: IContact;
-  formsClean: ()=>IAction;
-  contactsLoaded:  (contacts:IContact[])=>IAction;
-  delContact: ()=>IAction;
-  loadingOn: ()=>IAction;
+  formsClean(): IAction;
+  contactsLoaded(contacts:IContact[]): IAction;
+  delContact(): IAction;
+  loadingOn(): IAction;
   Service: any
 }
 
@@ -28,7 +28,6 @@ const DelContactForm = (props:PropsType) => {
       .then((contacts: IContact[]) => {
         contactsLoaded(contacts)
       })
-
     })
   }
   

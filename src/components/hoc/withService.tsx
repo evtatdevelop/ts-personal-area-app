@@ -1,4 +1,3 @@
-import React from "react";
 import ServiceContext from "../../serviceContext";
 
 const WithService = () => (Wrapped: any) => {

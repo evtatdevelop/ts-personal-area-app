@@ -15,7 +15,7 @@ interface PropsType {
   editForm: boolean;
   addForm: boolean;
   loading: boolean;
-  loadingOn: ()=>IAction;
+  loadingOn (): IAction;
 }
 
 const ContactPage = (props:PropsType) => {

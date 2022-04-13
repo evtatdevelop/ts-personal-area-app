@@ -9,8 +9,8 @@ import { delForm, editForm } from '../../../redux/actions';
 interface PropsType {
   key: number;
   data: IContact;
-  delForm: (id: number)=>IAction;
-  editForm: (id: number)=>IAction;
+  delForm(id: number): IAction;
+  editForm(id: number): IAction;
 }
 
 const ContactItem = (props: PropsType) => {  

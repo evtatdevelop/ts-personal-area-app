@@ -12,8 +12,8 @@ import { loadingOn, login } from '../../redux/actions';
 interface PropsType {
   loading: boolean;
   idToken: string;
-  loadingOn: () => IAction;
-  login: ({idToken, expiresIn}: IServerLoginResponse) => IAction;
+  loadingOn (): IAction;
+  login({idToken, expiresIn}: IServerLoginResponse): IAction;
   Service: any;
 }
 

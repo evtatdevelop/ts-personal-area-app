@@ -8,11 +8,11 @@ import WithService from '../hoc/withService';
 import { formsClean, contactsLoaded, addContact, loadingOn } from '../../redux/actions';
 
 interface IAddForm {
-  formsClean: ()=>IAction;
-  contactsLoaded: (contacts:IContact[])=>IAction;
-  addContact: ()=>IAction;
-  loadingOn: ()=>IAction;
-  Service: any
+  formsClean(): IAction;
+  contactsLoaded(contacts:IContact[]): IAction;
+  addContact(): IAction;
+  loadingOn(): IAction;
+  Service: any;
 }
 
 const AddContactForm: React.FC<IAddForm> = props => {

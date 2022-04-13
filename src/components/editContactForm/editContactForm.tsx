@@ -9,10 +9,10 @@ import { formsClean, contactsLoaded, editContact, loadingOn } from '../../redux/
 
 interface PropsType {
   contact: IContact;
-  formsClean: ()=>IAction;
-  contactsLoaded: (contacts:IContact[])=>IAction;
-  editContact: ()=>IAction;
-  loadingOn: ()=>IAction;
+  formsClean(): IAction;
+  contactsLoaded(contacts:IContact[]): IAction;
+  editContact(): IAction;
+  loadingOn(): IAction;
   Service: any;
 }
 

@@ -13,9 +13,9 @@ interface PropsType {
   contacts: IContact[];
   filtered: IContact[];
   Service: any;
-  contactsLoaded: (contacts:IContact[])=>IAction;
-  addForm: ()=>IAction;
-  loadingOn: ()=>IAction;
+  contactsLoaded(contacts:IContact[]): IAction;
+  addForm(): IAction;
+  loadingOn(): IAction;
 }
 
 class ContactList extends Component<PropsType, {}> {
