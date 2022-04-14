@@ -1,4 +1,5 @@
 import { IContact, IAction } from '../../ts';
+import Service from '../../services';
 import React, { useState } from 'react'
 import classes from './addContactForm.module.scss';
 import Button from '../button';
@@ -12,7 +13,7 @@ interface IAddForm {
   contactsLoaded(contacts:IContact[]): IAction;
   addContact(): IAction;
   loadingOn(): IAction;
-  Service: any;
+  Service: Service;
 }
 
 const AddContactForm: React.FC<IAddForm> = props => {
@@ -27,7 +28,7 @@ const AddContactForm: React.FC<IAddForm> = props => {
     e.preventDefault();
     if (!name) return;  
     loadingOn();
-    Service.add({name, phone, email})
+    Service.add({id: NaN, name, phone, email})
     .then(() =>{
       addContact();
       Service.getContacts()

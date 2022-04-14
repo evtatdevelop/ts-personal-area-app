@@ -1,6 +1,6 @@
 import ServiceContext from "../../serviceContext";
 
-const WithService = () => (Wrapped: any) => {
+const WithService = () => (Wrapped: React.FC<any>) => {
   return (props: any) => {
     return (
       <ServiceContext.Consumer>

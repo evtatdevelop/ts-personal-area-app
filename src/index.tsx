@@ -1,4 +1,3 @@
-import { IState } from './ts'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './rest.css';
@@ -12,7 +11,7 @@ import store from './redux/store';
 import ErrorBoundry from './components/errorBoundry';
 import ServiceContext from './serviceContext';
 
-const service: any = new Service();
+const service = new Service();
 
 ReactDOM.render(
   <React.StrictMode>

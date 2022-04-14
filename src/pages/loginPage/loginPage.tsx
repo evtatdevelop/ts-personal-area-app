@@ -1,4 +1,5 @@
 import { IState, IAction, IServerLoginResponse } from '../../ts';
+import Service from '../../services';
 import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import classes from './loginPage.module.scss';
@@ -14,7 +15,7 @@ interface PropsType {
   idToken: string;
   loadingOn (): IAction;
   login({idToken, expiresIn}: IServerLoginResponse): IAction;
-  Service: any;
+  Service: Service;
 }
 
 const LoginPage = (props:PropsType) => {
@@ -26,7 +27,7 @@ const LoginPage = (props:PropsType) => {
 
   const auth = ({mail, pass}: {mail: string, pass: string}) => {
     Service.auth(mail, pass) 
-    .then((response: IServerLoginResponse) => login(response))
+    .then((value: IServerLoginResponse) => login(value))
   } 
 
   const clearMail = () => setMail('');

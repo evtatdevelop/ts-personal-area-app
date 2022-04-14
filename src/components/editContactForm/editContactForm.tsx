@@ -1,4 +1,5 @@
 import { IState, IContact, IAction } from '../../ts';
+import Service from '../../services';
 import { useState } from 'react'
 import classes from './editContactForm.module.scss';
 import Button from '../button';
@@ -13,7 +14,7 @@ interface PropsType {
   contactsLoaded(contacts:IContact[]): IAction;
   editContact(): IAction;
   loadingOn(): IAction;
-  Service: any;
+  Service: Service;
 }
 
 const EditContactForm: React.FC<PropsType> = props => {
@@ -89,6 +90,7 @@ const EditContactForm: React.FC<PropsType> = props => {
           <Button
               label = "Accept"
               type = "submit"
+              handlerClick = {()=>{}}
             />
           <Button
               label = "Cancel"

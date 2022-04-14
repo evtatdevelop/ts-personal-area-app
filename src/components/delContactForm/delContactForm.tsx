@@ -1,4 +1,5 @@
 import { IState, IContact, IAction } from '../../ts';
+import Service from '../../services';
 import classes from './delContactForm.module.scss';
 import Button from '../button';
 import { connect } from 'react-redux';
@@ -12,7 +13,7 @@ interface PropsType {
   contactsLoaded(contacts:IContact[]): IAction;
   delContact(): IAction;
   loadingOn(): IAction;
-  Service: any
+  Service: Service;
 }
 
 const DelContactForm = (props:PropsType) => {

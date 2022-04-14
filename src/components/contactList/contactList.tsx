@@ -1,4 +1,5 @@
 import { IState, IContact, IAction } from '../../ts';
+import Service from '../../services';
 import {Component} from 'react'
 import classes from './contactList.module.scss';
 import ContactItem from './contactIItem';
@@ -12,7 +13,7 @@ import { contactsLoaded, addForm, loadingOn } from '../../redux/actions';
 interface PropsType {
   contacts: IContact[];
   filtered: IContact[];
-  Service: any;
+  Service: Service;
   contactsLoaded(contacts:IContact[]): IAction;
   addForm(): IAction;
   loadingOn(): IAction;
